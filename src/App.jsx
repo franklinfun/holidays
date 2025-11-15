@@ -1,7 +1,19 @@
+import { useState, useEffect } from 'react'
 import logo from './assets/ags-logo.svg'
 import './App.css'
 
 function App() {
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 50
+      setScrolled(isScrolled)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
   const trendingInternational = [
     {
       title: 'Dubai',
@@ -130,12 +142,12 @@ function App() {
       <header className="hero">
         <div className="floating-shape floating-shape--one" />
         <div className="floating-shape floating-shape--two" />
-        <nav className="nav">
+        <nav className={`nav ${scrolled ? 'scrolled' : ''}`}>
           <div className="brand">
             <img src={logo} alt="AGS Holidays logo" className="brand-logo" />
             <div className="brand-text">
               <span className="brand-title">AGS Holidays</span>
-              <span className="brand-tagline">Your Holiday, Your Way!</span>
+              <span className="brand-tagline animate-shimmer">Your Holiday, Your Way!</span>
             </div>
           </div>
           <div className="nav-links">
@@ -156,13 +168,15 @@ function App() {
 
         <div className="hero-grid">
           <div className="hero-content">
-            <span className="hero-preheading">
-              <span className="hero-preheading-dot" />
-              Your Holiday, Your Way!
+            <span className="hero-preheading animate-fade-in-up">
+              <span className="hero-preheading-dot animate-pulse" />
+              <span className="typewriter-text">Your Holiday, Your Way!</span>
             </span>
-            <h1>
-              Every journey is a story. Let us craft{' '}
-              <span className="hero-highlight">unforgettable getaways</span> with care and joy.
+            <h1 className="animate-fade-in-up-delay">
+              <span className="word-reveal">Every journey is a story.</span>{' '}
+              <span className="word-reveal word-reveal-delay-1">Let us craft</span>{' '}
+              <span className="hero-highlight gradient-text animate-glow">unforgettable getaways</span>{' '}
+              <span className="word-reveal word-reveal-delay-2">with care and joy.</span>
             </h1>
             <p>
               With 18+ years of travel expertise and 40,000+ delighted
@@ -226,7 +240,7 @@ function App() {
         <section id="about" className="section about">
           <div className="section-header">
             <span className="eyebrow">About AGS Holidays</span>
-            <h2>Experience worry-free holidays with our safety measures.</h2>
+            <h2 className="animate-slide-in-left">Experience worry-free holidays with our safety measures.</h2>
             <p>
               From budget escapes to luxurious retreats, we help you explore the
               world with confidence. Our seasoned travel experts curate journeys
@@ -265,7 +279,7 @@ function App() {
         <section id="packages" className="section trending">
           <div className="section-header">
             <span className="eyebrow">Trending International Destinations</span>
-            <h2>Discover the world’s most-loved escapes.</h2>
+            <h2 className="animate-slide-in-right">Discover the world's most-loved escapes.</h2>
             <p>
               Handpicked itineraries across continents, curated to immerse you
               in culture, cuisine, and unforgettable moments.
