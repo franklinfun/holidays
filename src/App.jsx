@@ -6,8 +6,9 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import Dashboard from './pages/Dashboard'
 
-// Import auth service to initialize mock API
-import './services/authService'
+// Mock API service removed - using real backend API
+// Uncomment the line below if you want to use mock API instead:
+// import './services/authService'
 
 function App() {
   return (
